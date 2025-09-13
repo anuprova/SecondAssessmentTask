@@ -16,7 +16,7 @@ import {
 const WeatherApp = () => {
   const Apikey = "fceca83a4273a40f02428024af8bc353";
 
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
