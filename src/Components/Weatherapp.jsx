@@ -10,7 +10,7 @@ import {
   Typography,
   ToggleButton,
   Container,
-  Paper
+  Paper,
 } from "@mui/material";
 
 const WeatherApp = () => {
@@ -65,178 +65,162 @@ const WeatherApp = () => {
 
   return (
     <Container align="center">
-      <Paper elevatiol={7}
-      
-         sx={{ 
-              mt:5,
-              bgcolor:"grey",
-              width:"600px",
-              p:4,
-              
-             }}
-      >
-
-    
-        <Typography
-            variant="h5"
-            gutterBottom
-            sx={{ color: "white",
-              mt:5
-             }}
-            
-          >
-            WeatherApp 🌤️
-          </Typography>
-       <Box sx={{ p: 4, textAlign: "center" }}>
-      {/* Input and Button */}
-
-      <Card
+      <Paper
+        elevatiol={7}
         sx={{
-          maxWidth: 500,
-          mx: "auto",
-          mt: 3,
-          p: 2,
-          mb: 3,
-          boxShadow: 3,
-          borderRadius: 3,
-          display: "flex",
-          flexDirection: "column",
-          bgcolor: "skyblue",
-          maxHeight: "400px",
+          mt: 5,
+          bgcolor: "grey",
+          width: "600px",
+          p: 4,
         }}
       >
-        <CardContent sx={{Type:'horizontal'}}>
-           <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            mb: 3,
-          }}
-        >
-        
+        <Typography variant="h5" gutterBottom sx={{ color: "white", mt: 5 }}>
+          WeatherApp 🌤️
+        </Typography>
+        <Box sx={{ p: 4, textAlign: "center" }}>
+          {/* Input and Button */}
 
-          <TextField
-            label="Enter your city"
-            variant="outlined"
-            onChange={(e) => setCity(e.target.value)}
-            error={!!error}
-            helperText={error}
-          />
-          <Box>
-            <Button
-              variant="outlined"
-              color="blue"
-              size="medium"
-              onClick={fetchWeather}
-              sx={{ color: "blue" }}
+          <Card
+            sx={{
+              maxWidth: 500,
+              mx: "auto",
+              mt: 3,
+              p: 2,
+              mb: 3,
+              boxShadow: 3,
+              borderRadius: 3,
+              display: "flex",
+              flexDirection: "column",
+              bgcolor: "skyblue",
+              maxHeight: "400px",
+            }}
+          >
+            <CardContent sx={{ Type: "horizontal" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  mb: 3,
+                }}
+              >
+                <TextField
+                  label="Enter your city"
+                  variant="outlined"
+                  onChange={(e) => setCity(e.target.value)}
+                  error={!!error}
+                  helperText={error}
+                />
+                <Box>
+                  <Button
+                    variant="outlined"
+                    color="blue"
+                    size="medium"
+                    onClick={fetchWeather}
+                    sx={{ color: "blue" }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
+
+          {/* Loading */}
+          {loading && <CircularProgress />}
+
+          {/* Weather Card */}
+          {weatherData?.main && (
+            <Card
+              sx={{
+                maxWidth: 400,
+                mx: "auto",
+                mt: 3,
+                p: 2,
+                mb: 3,
+                boxShadow: 3,
+                borderRadius: 3,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                bgcolor: "skyblue",
+              }}
             >
-              Submit
-            </Button>
-          </Box>
-        </Box>
-        </CardContent>
-       
-      </Card>
+              <CardContent>
+                <Typography sx={{ color: "yellow" }}>
+                  Weather Information
+                </Typography>
 
-      {/* Loading */}
-      {loading && <CircularProgress />}
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{ color: "text.secondary" }}
+                >
+                  📍 {weatherData.name}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  {weatherData.weather[0].description}
+                </Typography>
 
-      {/* Weather Card */}
-      {weatherData?.main && (
-        <Card
-          sx={{
-            maxWidth: 400,
-            mx: "auto",
-            mt: 3,
-            p: 2,
-            mb: 3,
-            boxShadow: 3,
-            borderRadius: 3,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            bgcolor: "skyblue",
-          }}
-        >
-          <CardContent>
-            <Typography sx={{ color: "yellow" }}>
-              Weather Information
-            </Typography>
-
-            <Typography
-              variant="h5"
-              gutterBottom
-              sx={{ color: "text.secondary" }}
-            >
-              📍 {weatherData.name}
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {weatherData.weather[0].description}
-            </Typography>
-
-            <Box sx={{ textAlign: "left", mt: 2 }}>
-              <Typography sx={{ color: "white" }}>
-                Temperature: 🌡️ {getTemperature()}
-              </Typography>
-              {/* <Typography>
+                <Box sx={{ textAlign: "left", mt: 2 }}>
+                  <Typography sx={{ color: "white" }}>
+                    Temperature: 🌡️ {getTemperature()}
+                  </Typography>
+                  {/* <Typography>
                 Temperature: {weatherData.main.temp} °C
               </Typography> */}
 
-              <Typography sx={{ color: "white" }}>
-                Condition : {weatherData.weather[0].description}
-              </Typography>
-              <Typography sx={{ color: "white" }}>
-                Humidity:💧 {weatherData.main.humidity}%
-              </Typography>
+                  <Typography sx={{ color: "white" }}>
+                    Condition : {weatherData.weather[0].description}
+                  </Typography>
+                  <Typography sx={{ color: "white" }}>
+                    Humidity:💧 {weatherData.main.humidity}%
+                  </Typography>
 
-              {/* <p>Condition: {weatherData.weather[0].description}</p> */}
-              {/* <p>
+                  {/* <p>Condition: {weatherData.weather[0].description}</p> */}
+                  {/* <p>
                 Coordinates: Lat: {weatherData.coord.lat}, Lon:{" "}
                 {weatherData.coord.lon}
               </p> */}
 
-             
-
-              <div>
-                {/* <button
+                  <div>
+                    {/* <button
                   onClick={() => setUnit("celsius")}
                   disabled={unit === "celsius"}
                 >
                   Celsius
                 </button> */}
-                <ToggleButton
-                  onClick={() => setUnit("celsius")}
-                  disabled={unit === "celsius"}
-                  color="secondary"
-                >
-                  Celcius
-                </ToggleButton>
-                &nbsp;
-                {/* <button
+                    <ToggleButton
+                      onClick={() => setUnit("celsius")}
+                      disabled={unit === "celsius"}
+                      color="secondary"
+                    >
+                      Celcius
+                    </ToggleButton>
+                    &nbsp;
+                    {/* <button
                   onClick={() => setUnit("fahrenheit")}
                   disabled={unit === "fahrenheit"}
                 >
                   Fahrenheit
                 </button> */}
-                <ToggleButton
-                  onClick={() => setUnit("fahrenheit")}
-                  disabled={unit === "fahrenheit"}
-                  color="secondary"
-                >
-                  Fahrenheit
-                </ToggleButton>
-              </div>
-            </Box>
-          </CardContent>
-        </Card>
-      )}
-    </Box>
+                    <ToggleButton
+                      onClick={() => setUnit("fahrenheit")}
+                      disabled={unit === "fahrenheit"}
+                      color="secondary"
+                    >
+                      Fahrenheit
+                    </ToggleButton>
+                  </div>
+                </Box>
+              </CardContent>
+            </Card>
+          )}
+        </Box>
       </Paper>
     </Container>
-   
   );
 };
 
